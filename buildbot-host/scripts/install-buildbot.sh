@@ -4,9 +4,7 @@
 #
 set -ex
 
-BUILDBOT_VERSION=3.11.1
-
-# hardcode cryptography version since newer don't work on CentOS 7
+BUILDBOT_VERSION=3.11.9
 
 # Upgrading pip may or may not work. On Ubuntu 24.04 it may fail with
 #
@@ -15,7 +13,6 @@ BUILDBOT_VERSION=3.11.1
 # Try and if it fails just keep on going
 #
 pip3 install $PIP_INSTALL_OPTS --upgrade pip || true
-pip --no-cache-dir install $PIP_INSTALL_OPTS cryptography==37.0.4
 pip --no-cache-dir install $PIP_INSTALL_OPTS twisted[tls]
 pip --no-cache-dir install $PIP_INSTALL_OPTS buildbot_worker==$BUILDBOT_VERSION
 
