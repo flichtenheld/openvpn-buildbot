@@ -1,7 +1,7 @@
 build {
   source "amazon-ebs.windows-server-2022" {
     name     = "msitest-windows-server-2022"
-    ami_name = "msitest-agent-windows-server-2022-2"
+    ami_name = "msitest-agent-windows-server-2022-3"
   }
 
   provisioner "file" {
@@ -30,7 +30,6 @@ build {
   # Required for some installers
   #provisioner "windows-restart" {}
   provisioner "powershell" {
-    only = ["amazon-ebs.msitest-windows-server-2022"]
     # make sure to run user data scripts on first boot from AMI
     inline = ["& 'C:/Program Files/Amazon/EC2Launch/EC2Launch.exe' reset --clean"]
   }
