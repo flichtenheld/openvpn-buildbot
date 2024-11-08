@@ -1,8 +1,4 @@
 build {
-  source "amazon-ebs.windows-server-2019" {
-    name     = "jenkins-agent-windows-server-2019"
-    ami_name = "jenkins-agent-windows-server-2019-5-${local.timestamp}"
-  }
   source "amazon-ebs.windows-server-2022" {
     name     = "jenkins-agent-windows-server-2022"
     ami_name = "jenkins-agent-windows-server-2022-3-${local.timestamp}"
@@ -17,7 +13,6 @@ build {
     destination = "C:/config"
   }
   provisioner "powershell" {
-    only   = ["amazon-ebs.jenkins-agent-windows-server-2022"]
     inline = ["& 'C:/Program Files/Amazon/EC2Launch/EC2Launch.exe' status --block"]
   }
   provisioner "powershell" {
@@ -58,12 +53,6 @@ build {
   # Required for some installers
   provisioner "windows-restart" {}
   provisioner "powershell" {
-    only = ["amazon-ebs.jenkins-agent-windows-server-2019"]
-    # make sure to run user data scripts on first boot from AMI
-    inline = ["C:/ProgramData/Amazon/EC2-Windows/Launch/Scripts/InitializeInstance.ps1 -Schedule"]
-  }
-  provisioner "powershell" {
-    only = ["amazon-ebs.jenkins-agent-windows-server-2022"]
     # make sure to run user data scripts on first boot from AMI
     inline = ["& 'C:/Program Files/Amazon/EC2Launch/EC2Launch.exe' reset --clean"]
   }

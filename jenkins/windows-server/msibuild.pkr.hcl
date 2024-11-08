@@ -1,8 +1,4 @@
 build {
-  source "amazon-ebs.windows-server-2019" {
-    name     = "msibuild-windows-server-2019-2.5"
-    ami_name = "msibuild-windows-server-2019-2.5-5"
-  }
   source "amazon-ebs.windows-server-2022" {
     name     = "msibuild-windows-server-2022-2.6"
     ami_name = "msibuild-windows-server-2022-2.6-6"
@@ -43,19 +39,9 @@ build {
     inline = ["C:/Windows/Temp/scripts/pwsh.ps1"]
   }
   provisioner "powershell" {
-    only   = ["amazon-ebs.msibuild-windows-server-2019-2.5"]
-    inline = ["C:/Windows/Temp/scripts/vsbuildtools.ps1 -version 2019"]
-  }
-  provisioner "powershell" {
-    only   = ["amazon-ebs.msibuild-windows-server-2022-2.6"]
     inline = ["C:/Windows/Temp/scripts/vsbuildtools.ps1 -version 2022"]
   }
   provisioner "powershell" {
-    only   = ["amazon-ebs.msibuild-windows-server-2019-2.5"]
-    inline = ["C:/Windows/Temp/scripts/build-deps.ps1 -configfiles C:\\config -workdir C:\\buildbot\\msbuild -openvpn_ref release/2.5 -openvpn_build_ref release/2.5 -openvpn_gui master -openssl openssl -debug"]
-  }
-  provisioner "powershell" {
-    only   = ["amazon-ebs.msibuild-windows-server-2022-2.6"]
     inline = ["C:/Windows/Temp/scripts/build-deps-unified.ps1 -configfiles C:\\config -workdir C:\\buildbot\\msbuild -openvpn_build_ref release/2.6 -debug"]
   }
   provisioner "powershell" {
