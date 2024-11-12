@@ -77,6 +77,28 @@ python3-wheel \
 uncrustify \
 uuid-dev
 
+if [ "${INSTALL_MINGW:-false}" = "true" ]; then
+  # MingW + vcpkg
+  $APT_INSTALL \
+  man2html-base \
+  mingw-w64 \
+  ninja-build \
+  unzip \
+  zip
+
+  cd /opt
+  git clone https://github.com/microsoft/vcpkg
+  cd vcpkg
+  ./bootstrap-vcpkg.sh
+
+  $APT_INSTALL wget software-properties-common
+  wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
+  dpkg -i packages-microsoft-prod.deb
+  rm -f packages-microsoft-prod.deb
+  apt-get update
+  $APT_INSTALL powershell
+fi
+
 # Only for some distros
 $APT_INSTALL systemd-dev || true
 
