@@ -1,0 +1,2 @@
+ENV VCPKG_ROOT=/opt/vcpkg
+ENV VCPKG_DEFAULT_BINARY_CACHE=/home/buildbot/vcpkg/cache
