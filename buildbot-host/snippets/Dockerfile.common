@@ -6,6 +6,7 @@ WORKDIR /buildbot
 # Install build dependencies for OpenVPN
 RUN mkdir -p /buildbot
 ARG DEPS_SH
+ARG INSTALL_MINGW
 COPY scripts/${DEPS_SH} /buildbot/
 RUN set -ex; \
     /buildbot/${DEPS_SH}; \
