@@ -10,6 +10,7 @@ automake \
 bzip2 \
 ccache \
 cmake \
+crypto-policies-scripts \
 dbus-devel \
 fping \
 gcc \
@@ -57,6 +58,9 @@ tinyxml2-devel \
 which \
 xxhash-devel \
 zlib-devel
+
+# make our SHA1-signed CA work on Fedora 41
+update-crypto-policies --set FEDORA40 || true
 
 # Hack to ensure that kernel headers can be found from a predictable place
 ln -s /usr/src/kernels/$(ls /usr/src/kernels|head -n 1) /buildbot/kernel-headers
