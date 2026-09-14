@@ -19,6 +19,7 @@ build-essential \
 ccache \
 clang \
 cmake \
+cppcheck \
 curl \
 debhelper \
 dh-autoreconf \
