@@ -1,4 +1,6 @@
 Write-Host "Installing python"
 & choco.exe install -y python
-# some of our python scripts do not work with 3.13+, yet
+# Make sure the versions we're currently using
+# for our build scripts is installed
+& choco.exe install -y python314
 & choco.exe install -y python312
